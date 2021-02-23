@@ -1,12 +1,16 @@
 version: "3.8"
 services:
-  nodejs:
-    image: node:15-alpine
+  app:
+    build:
+      context: ./app
+    ports:
+    - 3000:3000
     networks:
     - graphql-server-example
     depends_on:
     - mysql
-    container_name: nodejs
+    restart: on-failure
+    container_name: app
   mysql:
     image: mysql:5.7
     environment:
